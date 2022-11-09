@@ -48,13 +48,13 @@ resource "aws_launch_configuration" "lc" {
     create_before_destroy = true
   }
   iam_instance_profile        = aws_iam_instance_profile.ecs_service_role.name
-  key_name                    = var.key_name
+  key_name                    = "key1"
   security_groups             = [aws_security_group.ec2-sg.id]
   associate_public_ip_address = true
   user_data                   = <<EOF
 #! /bin/bash
 sudo apt-get update
-sudo echo "ECS_CLUSTER=${var.cluster_name}" >> /etc/ecs/ecs.config
+sudo echo "ECS_CLUSTER=democluster" >> /etc/ecs/ecs.config
 EOF
 }
 
